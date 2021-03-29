@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+        .btnbtn {
+            text-align: left;
+            background-color: white;
+            border: 1px;
+            color: black;
+            padding: 12px 16px;
+            font-size: 24px;
+            cursor: pointer;
+        }
+        
+        .btnbtn:hover {
+            background-color: #F2F2F2;
+        }
+        
+        .lbl {
+            font-weight: bold;
+            margin-top: 7px;
+        }
+        
+        html {
+            height: 100%;
+        }
+        
+        body {
+            font-family: sans-serif;
+            background: #F2F2F2;
+        }
+        
+        .card {
+            height: 40%;
+            /* display: flex; */
+            justify-content: center;
+            align-items: center;
+            margin-top: 10%;
+            margin-left: auto;
+            margin-right: auto;
+            /* transform: translate(-50%, -50%); */
+            background: #FFFFFF;
+            /* box-sizing: border-box; */
+            box-shadow: 0 15px 25px rgba(0, 0, 0, .05);
+            border-radius: 10px;
+        }
+        
+        input {
+            margin-top: 3%;
+            background-color: #d1d1d1;
+            /* background: #F7F7F7; */
+        }
+        
+        .hidden {
+            display: none;
+        }
+        
+        .lbl {
+            font-size: 16px;
+            /* color: #fff; */
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="card col-sm-12 col-md-8 col-lg-8" id="c1" style="padding:2%">
+        <div style="margin: 0 auto;text-align:center;" class="form-group col-sm-12 col-md-10">
+            <h2 id="mainText"></h2>
+        </div>
+       
+        <div style="margin: 0 auto;text-align:center;" id="submit_button">
+
+          <br>
+            <button type="button" id="done" class="btn btn-primary" onclick="done()">Done</button>
+            <button type="button" id="snooze" class="btn btn-primary" onclick="snooze()">Snooze</button>
+        </div>
+    </div>
+    <div id="loader" style="position: fixed;height: 100%;width: 100%;top: 0;left: 0;right: 0;bottom: 0;z-index: 9999;">
+        <div style=" position: absolute; width: 100%;height:100%; display: flex;align-items: center;justify-content: center;background-color: black;opacity: 0.5;">
+        </div>
+        <div style="width: 100%;height:100%; display: flex;align-items: center;justify-content: center;">
+            <div style="text-align: center;">
+                <div style="width: 4rem; height: 4rem;" class="spinner-border text-primary" role="status">
+                    <span class="sr-only">Loading...</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src=" https://code.jquery.com/jquery-3.5.1.slim.min.js " integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj " crossorigin="anonymous "></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
+    <script>
+      google.script.run.withSuccessHandler(printResult)
+                    .getResult();
+      var row
+      function printResult(array){
+        var text = "Hey, it’s branzino? " + array[0] + " " + array[1] + " It’s Time to " + array[2]
+        $("#mainText").html(text);
+        row = array[3]
+        $("#loader").attr("hidden", true);
+      }
+      function done(){
+        console.log(row)
+        $("#loader").attr("hidden", false);
+        google.script.run.withSuccessHandler(close)
+                    .setResult(row);
+      }
+      function snooze(){
+        $("#loader").attr("hidden", false);
+        console.log(row)
+        google.script.run.withSuccessHandler(close)
+                    .setValue(row);
+      }
+      function close(){
+        $("#loader").attr("hidden", true);
+        $("#c1").addClass("hidden")
+      }
+       
+    </script>
+</body>
+
+</html>
