@@ -1,4 +1,5 @@
 # Activity-source
 
-This is an open source activity tracker that links a google spreadsheet document with a custom HTML page.
-Check [#3](https://github.com/girolamodaschio/activity-source/issues/3) for a WIP demo.
+Here is a Spreadsheet based weekly <a href="https://github.com/girolamodaschio/activity-source">activity tracker</a>. 
+Running on Google Script allows user to create a free NoSql database of their weekly activities.
+Inside the repository you can also find the code of a custom html page with buttons that interacts with the code.
